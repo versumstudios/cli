@@ -2,7 +2,7 @@ import inquirer from 'inquirer';
 import fetch from 'node-fetch';
 import ora from 'ora-classic';
 
-import { TEZTOK_API, PLATFORMS, MESSAGES, convertTezTokPlatform } from '@constants';
+import { TEZTOK_API, PLATFORMS, MESSAGES, getTezTokPlatform } from '@constants';
 import { validateAddress } from '@taquito/utils';
 import { SaveToFile } from '@utils/csv';
 import { error } from '@utils/logger';
@@ -78,7 +78,7 @@ export const action = (hasPlatform: boolean) => {
       .then((e) => e.data.holdings)
       .then(async (collectors: CollectorsType) => {
         const data = hasPlatform
-          ? mapCollectors(collectors).filter((e) => e.platform === convertTezTokPlatform(platform as PLATFORMS))
+          ? mapCollectors(collectors).filter((e) => e.platform === getTezTokPlatform(platform as PLATFORMS))
           : mapCollectors(collectors);
         spinner.succeed();
         if (format === 'unique') {

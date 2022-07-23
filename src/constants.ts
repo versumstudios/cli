@@ -50,7 +50,7 @@ export const getContractFromPlatform = (platform: PLATFORMS, token_id: string) =
   }
 };
 
-export const convertTezTokPlatform = (platform: PLATFORMS) => {
+export const getTezTokPlatform = (platform: PLATFORMS) => {
   switch (platform) {
     case PLATFORMS.VERSUM:
       return 'VERSUM';
