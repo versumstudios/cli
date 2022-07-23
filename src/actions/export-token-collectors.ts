@@ -2,7 +2,7 @@ import inquirer, { Answers } from 'inquirer';
 import fetch from 'node-fetch';
 import ora from 'ora-classic';
 
-import { CONTRACT_VERSUM, getContractFromPlatform, PLATFORMS, TEZTOK_API } from '@constants';
+import { CONTRACT_VERSUM, getContractFromPlatform, PLATFORMS, TEZTOK_API, MESSAGES } from '@constants';
 import { validateContractAddress } from '@taquito/utils';
 import { SaveToFile } from '@utils/csv';
 import { error } from '@utils/logger';
@@ -17,7 +17,7 @@ export const action = () => {
     {
       type: 'list',
       name: 'platform',
-      message: 'Select platform',
+      message: MESSAGES.SELECT_PLATFORM,
       choices: [PLATFORMS.VERSUM, PLATFORMS.HICETNUNC, PLATFORMS.FXHASH, PLATFORMS.OTHER],
       default() {
         return PLATFORMS.VERSUM;
@@ -61,7 +61,7 @@ export const action = () => {
   inquirer.prompt(questions).then(({ platform, contract, token }: Record<string, string>) => {
     // select contract address from platform
     const address: string = getContractFromPlatform(platform as PLATFORMS, token as string) || contract;
-    const spinner = ora('Fetching data...').start();
+    const spinner = ora(MESSAGES.FETCHING_DATA).start();
 
     fetch(TEZTOK_API, { method: 'POST', body: JSON.stringify({ query, variables: { address, token } }) })
       .then((e) => e.json())
@@ -76,9 +76,7 @@ export const action = () => {
         await SaveToFile(`collectors-${platform}-${address}-${token}.csv`, data);
       })
       .catch(() => {
-        const errorMsg = 'Error exporting collectors';
-        error(errorMsg);
-        spinner.fail(errorMsg);
+        spinner.fail(MESSAGES.ERROR_COLLECTOR_EXPORT);
       });
   });
 };

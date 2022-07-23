@@ -2,7 +2,7 @@ import inquirer from 'inquirer';
 import fetch from 'node-fetch';
 import ora from 'ora-classic';
 
-import { TEZTOK_API } from '@constants';
+import { TEZTOK_API, PLATFORMS, MESSAGES, convertTezTokPlatform } from '@constants';
 import { validateAddress } from '@taquito/utils';
 import { SaveToFile } from '@utils/csv';
 import { error } from '@utils/logger';
@@ -13,13 +13,31 @@ type CollectorsType = {
   token?: { platform: string; tokenId: string };
 }[];
 
-export const action = () => {
+const mapCollectors = (collectors: CollectorsType) => {
+  return collectors.map(({ holder_address, amount, token }) => ({
+    address: holder_address,
+    amount,
+    platform: token ? `${token.platform}` : '',
+  }));
+};
+
+export const action = (hasPlatform: boolean) => {
   const questions = [
     {
       type: 'list',
       name: 'format',
       message: 'Select data format',
       choices: ['unique', 'full'],
+      default() {
+        return 'unique';
+      },
+    },
+    {
+      type: 'list',
+      name: 'platform',
+      message: MESSAGES.SELECT_PLATFORM,
+      choices: [PLATFORMS.VERSUM, PLATFORMS.HICETNUNC, PLATFORMS.FXHASH,],
+      when: hasPlatform,
       default() {
         return 'unique';
       },
@@ -53,17 +71,15 @@ export const action = () => {
       }
     }
   }`;
-  inquirer.prompt(questions).then(({ format, address }: Record<string, string>) => {
-    const spinner = ora('Fetching data...').start();
+  inquirer.prompt(questions).then(({ format, address, platform }: Record<string, string>) => {
+    const spinner = ora(MESSAGES.FETCHING_DATA).start();
     fetch(TEZTOK_API, { method: 'POST', body: JSON.stringify({ query, variables: { address } }) })
       .then((e) => e.json())
       .then((e) => e.data.holdings)
       .then(async (collectors: CollectorsType) => {
-        const data = collectors.map(({ holder_address, amount, token }) => ({
-          address: holder_address,
-          amount,
-          platform: token ? `${token.platform}` : '',
-        }));
+        const data = hasPlatform
+          ? mapCollectors(collectors).filter((e) => e.platform === convertTezTokPlatform(platform as PLATFORMS))
+          : mapCollectors(collectors);
         spinner.succeed();
         if (format === 'unique') {
           // Use set to remove duplicates and convert to object[]
@@ -75,9 +91,7 @@ export const action = () => {
         await SaveToFile(`collectors-${format}-${address}.csv`, data);
       })
       .catch(() => {
-        const errorMsg = 'Error exporting collectors';
-        error(errorMsg);
-        spinner.fail(errorMsg);
+        spinner.fail(MESSAGES.ERROR_COLLECTOR_EXPORT);
       });
   });
 };

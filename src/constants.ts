@@ -28,6 +28,7 @@ export enum PLATFORMS {
   VERSUM = 'versum',
   HICETNUNC = 'hicetnunc',
   FXHASH = 'fxhash',
+  OBJKT = 'objkt',
   OTHER = 'other',
 }
 
@@ -48,3 +49,24 @@ export const getContractFromPlatform = (platform: PLATFORMS, token_id: string) =
       return false;
   }
 };
+
+export const convertTezTokPlatform = (platform: PLATFORMS) => {
+  switch (platform) {
+    case PLATFORMS.VERSUM:
+      return 'VERSUM';
+    case PLATFORMS.HICETNUNC:
+      return 'HEN';
+    case PLATFORMS.FXHASH:
+      return 'FXHASH';
+    case PLATFORMS.OBJKT:
+      return 'OBJKT';
+    default:
+      return false;
+  }
+};
+
+export enum MESSAGES {
+  SELECT_PLATFORM = 'Select platform',
+  ERROR_COLLECTOR_EXPORT = 'Error exporting collectors',
+  FETCHING_DATA = 'Fetching data...',
+}
