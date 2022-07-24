@@ -11,6 +11,7 @@
     "lib": ["ES2020"],
     "resolveJsonModule": true,
     "sourceMap": false,
+    "skipLibCheck": true,
     "outDir": "./bin",
     "typeRoots": ["./node_modules/@types"],
     "rootDir": ".",
@@ -20,8 +21,7 @@
       "@commands/*": ["src/commands/*"],
       "@utils/*": ["src/utils/*"],
       "@constants": ["src/constants"]
-    },
-    "plugins": [{ "transform": "typescript-transform-paths" }]
+    }
   },
   "include": ["src/**/*"]
 }
