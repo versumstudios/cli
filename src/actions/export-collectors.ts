@@ -45,7 +45,7 @@ export const action = (hasPlatform: boolean) => {
     {
       type: 'input',
       name: 'address',
-      message: 'Enter address',
+      message: MESSAGES.ENTER_ADDRESS,
       validate: async (input: string) => {
         if ((await validateAddress(input)) === 3) {
           return true;
