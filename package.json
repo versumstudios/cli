@@ -11,19 +11,22 @@
     "url": "https://github.com/versumstudios/cli.git"
   },
   "scripts": {
-    "start": "ttsc -w -p .",
-    "build": "ttsc",
+    "start": "rm -rf ./bin && concurrently --raw \"tsc -w -p .\" \"tsc-alias -w\"",
+    "build": "rm -rf ./bin && tsc && tsc-alias",
     "test": "echo \"Error: no test specified\" && exit 1",
     "local:install": "npm install -g .",
     "local:uninstall": "npm uninstall -g @versumstudios/cli",
     "local:link": "yarn local:uninstall && yarn local:install",
     "prepare": "husky install"
   },
+  "files": [
+    "bin"
+  ],
   "bin": {
     "versum": "./bin/src/index.js"
   },
   "engines": {
-    "node": ">= 16"
+    "node": ">=16"
   },
   "commitlint": {
     "extends": [
@@ -33,7 +36,6 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
-    "@taquito/utils": "^13.0.1",
     "@types/inquirer": "^8.2.1",
     "@types/node": "^18.0.6",
     "@types/node-fetch": "^2.6.2",
@@ -41,6 +43,7 @@
     "@types/update-notifier": "^6.0.1",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
+    "concurrently": "^7.3.0",
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^3.3.0",
@@ -50,11 +53,11 @@
     "husky": "^8.0.1",
     "prettier": "^2.7.1",
     "ts-node": "^10.9.1",
-    "ttypescript": "^1.5.13",
-    "typescript": "^4.7.4",
-    "typescript-transform-paths": "^3.3.1"
+    "tsc-alias": "^1.7.0",
+    "typescript": "^4.7.4"
   },
   "dependencies": {
+    "@taquito/utils": "^13.0.1",
     "chalk": "4.1.2",
     "commander": "^9.4.0",
     "inquirer": "8.0.0",

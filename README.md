@@ -1,8 +1,10 @@
+[![Join the community on GitHub Discussions](https://badgen.net/badge/join%20the%20discussion/on%20github/black?icon=github)](https://github.com/versumstudios/cli/discussions)
+
 # @versumstudios/cli
 
 The command-line interface for versum.
 
-## Install
+## Usage
 
 To install the latest version of Versum CLI, run this command:
 
@@ -10,22 +12,14 @@ To install the latest version of Versum CLI, run this command:
 npm i -g @versumstudios/cli
 ```
 
-## Get started
+To get started run:
 
 ```bash
 versum
 ```
 
-## Develop
+## Contributing
 
-Follow the steps below to run the CLI locally:
-
-1. Make sure you do not have any instance of @versumstudios/cli already installed. You can also verify if the CLI is installed by running `npm list -g --depth 0`. If you have a previous version installed you should uninstall it via `yarn local:uninstall`.
-
-2. Install all dependencies by running `yarn`
-
-3. Run `yarn local:link`. It should create a symlink pointing to `./bin/src/index.js`.
-
-4. Run `yarn start` to transpile the typescript into javascript.
-
-5. Every time you need to test a new command, just type `versum <command>`.
+- [Code of Conduct](https://github.com/versumstudios/cli/blob/main/CODE_OF_CONDUCT.md)
+- [Contributing Guidelines](https://github.com/versumstudios/cli/blob/main/CONTRIBUTING.md)
+- [Apache-2.0 License](https://github.com/versumstudios/cli/blob/main/LICENSE)

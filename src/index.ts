@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-
 import { program } from 'commander';
 import fs from 'fs';
 import updateNotifier from 'update-notifier';
 
 import { COMMANDS, DESCRIPTION, PACKAGE } from '@constants';
+import { error } from '@utils/logger';
 
 const main = async () => {
   // check for updates
@@ -21,7 +21,7 @@ const main = async () => {
 
   // commands
   const loadCommands = async () => {
-    const files = fs.readdirSync(COMMANDS);
+    const files = fs.readdirSync(COMMANDS).map((e) => e.replace('.ts', ''));
 
     for (const file of files) {
       const { command } = await import(`${COMMANDS}/${file}`);
@@ -42,19 +42,15 @@ const handleRejection = async (err: Error | unknown) => {
     if (err instanceof Error) {
       await handleUnexpected(err);
     } else {
-      console.error(`An unexpected rejection occurred\n  ${err}`);
+      error(`An unexpected rejection occurred\n  ${err}`);
     }
   } else {
-    console.error('An unexpected empty rejection occurred');
+    error('An unexpected empty rejection occurred');
   }
-
-  process.exit(1);
 };
 
 const handleUnexpected = async (err: Error) => {
-  console.error(`An unexpected error occurred!\n${err}`);
-
-  process.exit(1);
+  error(`An unexpected error occurred!\n${err}`);
 };
 
 process.on('unhandledRejection', handleRejection);

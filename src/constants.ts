@@ -1,5 +1,6 @@
 import chalk from 'chalk';
-import fs from 'fs';
+// import fs from 'fs';
+import * as pkg from 'package.json';
 
 export const LOGO = `
                                                      
@@ -14,7 +15,7 @@ export const COMMANDS = `${__dirname}/commands`;
 
 export const ACTIONS = './actions';
 
-export const PACKAGE = JSON.parse(fs.readFileSync(`${process.cwd()}/package.json`, 'utf-8'));
+export const PACKAGE = pkg; // JSON.parse(fs.readFileSync(`${process.cwd()}/package.json`, 'utf-8'));
 
 export const VERSION = `${PACKAGE.name} ${PACKAGE.version}`;
 
