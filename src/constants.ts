@@ -23,6 +23,8 @@ ${LOGO}
 ${chalk.bgBlack(chalk.green(VERSION))}`;
 
 export const TEZTOK_API = 'https://api.teztok.com/v1/graphql';
+export const COINCODEX_API = 'https://coincodex.com/api/';
+export const TZKT_API = 'https://api.tzkt.io/';
 
 export enum PLATFORMS {
   VERSUM = 'versum',
@@ -67,6 +69,7 @@ export const getTezTokPlatform = (platform: PLATFORMS) => {
 
 export enum MESSAGES {
   SELECT_PLATFORM = 'Select platform',
+  ENTER_ADDRESS = 'Enter address',
   ERROR_COLLECTOR_EXPORT = 'Error exporting collectors',
   FETCHING_DATA = 'Fetching data...',
 }
