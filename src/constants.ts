@@ -40,7 +40,9 @@ export const CONTRACT_HICETNUNC = 'KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton';
 export const CONTRACT_VERSUM = 'KT1LjmAdYQCLBjwv4S2oFkEzyHVkomAf5MrW';
 export const CONTRACT_FXHASH = 'KT1KEa8z6vWXDJrVqtMrAeDVzsvxat3kHaCE';
 export const CONTRACT_FXHASH2 = 'KT1U6EHmNxJTkvaWJ4ThczG4FSDaHC21ssvi';
-export const CONTRACT_8BIDOU = 'KT1'; // TODO: get this contract from @xat
+export const CONTRACT_8BIDOU1 = 'KT1MxDwChiDwd6WBVs24g1NjERUoK622ZEFp';
+export const CONTRACT_8BIDOU2 = 'KT1TR1ErEQPTdtaJ7hbvKTJSa1tsGnHGZTpf';
+export const CONTRACT_8BIDOU3 = 'KT1VikAWA8wQHLZgHoAGL7Z9kCjgbCEnvWA3';
 export const CONTRACT_TYPED = 'KT1J6NY5AU61GzUX51n59wwiZcGJ9DrNTwbK';
 
 export const getContractFromPlatform = (platform: PLATFORMS, token_id: string) => {
@@ -50,7 +52,7 @@ export const getContractFromPlatform = (platform: PLATFORMS, token_id: string) =
     case PLATFORMS.HICETNUNC:
       return CONTRACT_HICETNUNC;
     case PLATFORMS.EIGHTBIDOU:
-      return CONTRACT_8BIDOU;
+      return CONTRACT_8BIDOU1;
     case PLATFORMS.TYPED:
       return CONTRACT_TYPED;
     case PLATFORMS.FXHASH:

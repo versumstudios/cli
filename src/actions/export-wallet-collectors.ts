@@ -82,6 +82,8 @@ export const action = (options: Record<string, string>) => {
         PLATFORMS.HICETNUNC,
         PLATFORMS.FXHASH,
         PLATFORMS.OBJKTCOM,
+        PLATFORMS.EIGHTBIDOU,
+        PLATFORMS.TYPED,
         new Separator(),
         PLATFORMS.ALL,
       ],
