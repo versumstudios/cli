@@ -4,6 +4,12 @@
 
 The command-line interface for versum.
 
+- [versum-cli](#versum-cli)
+  - [Usage](#usage)
+  - [Contributing](#contributing)
+  - [How to use](#how-to-use)
+    - [Export](#export)
+
 ## Usage
 
 To install the latest version of Versum CLI, run this command:
@@ -23,3 +29,28 @@ versum
 - [Code of Conduct](https://github.com/versumstudios/cli/blob/main/CODE_OF_CONDUCT.md)
 - [Contributing Guidelines](https://github.com/versumstudios/cli/blob/main/CONTRIBUTING.md)
 - [Apache-2.0 License](https://github.com/versumstudios/cli/blob/main/LICENSE)
+
+## How to use
+
+```bash
+versum -h
+```
+
+### Export
+
+The versum CLI allows you to export several chunks of data into `.csv` files.
+
+### Export `token-collectors`
+
+```bash
+versum export token-collectors
+versum export token-collectors --contract KT1LjmAdYQCLBjwv4S2oFkEzyHVkomAf5MrW --token 0
+```
+
+### Export `wallet-collectors`
+
+```bash
+versum export wallet-collectors
+versum export wallet-collectors --wallet tz1eht4WAjkqU7kaupJd8qCDmec9HuKfGf68
+versum export wallet-collectors --wallet tz1eht4WAjkqU7kaupJd8qCDmec9HuKfGf68 --platform versum
+```

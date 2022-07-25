@@ -40,17 +40,17 @@ const main = async () => {
 const handleRejection = async (err: Error | unknown) => {
   if (err) {
     if (err instanceof Error) {
-      await handleUnexpected(err);
+      await handleUnexpected();
     } else {
-      error(`An unexpected rejection occurred\n  ${err}`);
+      error('An unexpected rejection occurred');
     }
   } else {
     error('An unexpected empty rejection occurred');
   }
 };
 
-const handleUnexpected = async (err: Error) => {
-  error(`An unexpected error occurred!\n${err}`);
+const handleUnexpected = async () => {
+  error('An unexpected error occurred');
 };
 
 process.on('unhandledRejection', handleRejection);

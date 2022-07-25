@@ -13,12 +13,12 @@
     "sourceMap": false,
     "skipLibCheck": true,
     "outDir": "./bin",
-    "typeRoots": ["./node_modules/@types"],
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {
       "@actions/*": ["src/actions/*"],
       "@commands/*": ["src/commands/*"],
+      "@custom-types/*": ["src/custom-types/*"],
       "@utils/*": ["src/utils/*"],
       "@constants": ["src/constants"]
     }

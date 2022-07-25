@@ -1,19 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import chalk from 'chalk';
+import ora from 'ora';
 
-const _error = console.error;
-const _log = console.log;
-const _info = console.info;
-
-export const error = function (...args: any) {
-  _error(chalk.bgBlack(chalk.red.apply(console, args)));
+export const error = function (message: string) {
+  ora(message).fail();
   process.exit(1);
 };
 
-export const log = function (...args: any) {
-  _log(chalk.bgBlack(chalk.green.apply(console, args)));
+export const log = function (message: string) {
+  ora(message).succeed();
 };
 
-export const info = function (...args: any) {
-  _info(chalk.bgBlack(chalk.blue.apply(console, args)));
+export const info = function (message: string) {
+  ora(message).info();
 };
