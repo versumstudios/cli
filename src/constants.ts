@@ -26,10 +26,13 @@ ${chalk.bgBlack(chalk.green(VERSION))}`;
 export const TEZTOK_API = 'https://api.teztok.com/v1/graphql';
 
 export enum PLATFORMS {
+  ALL = 'all platforms',
   VERSUM = 'versum',
   HICETNUNC = 'hicetnunc',
   FXHASH = 'fxhash',
-  OBJKT = 'objkt',
+  OBJKTCOM = 'objktcom',
+  EIGHTBIDOU = '8bidou',
+  TYPED = 'typed',
   OTHER = 'other',
 }
 
@@ -37,6 +40,8 @@ export const CONTRACT_HICETNUNC = 'KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton';
 export const CONTRACT_VERSUM = 'KT1LjmAdYQCLBjwv4S2oFkEzyHVkomAf5MrW';
 export const CONTRACT_FXHASH = 'KT1KEa8z6vWXDJrVqtMrAeDVzsvxat3kHaCE';
 export const CONTRACT_FXHASH2 = 'KT1U6EHmNxJTkvaWJ4ThczG4FSDaHC21ssvi';
+export const CONTRACT_8BIDOU = 'KT1'; // TODO: get this contract from @xat
+export const CONTRACT_TYPED = 'KT1J6NY5AU61GzUX51n59wwiZcGJ9DrNTwbK';
 
 export const getContractFromPlatform = (platform: PLATFORMS, token_id: string) => {
   switch (platform) {
@@ -44,6 +49,10 @@ export const getContractFromPlatform = (platform: PLATFORMS, token_id: string) =
       return CONTRACT_VERSUM;
     case PLATFORMS.HICETNUNC:
       return CONTRACT_HICETNUNC;
+    case PLATFORMS.EIGHTBIDOU:
+      return CONTRACT_8BIDOU;
+    case PLATFORMS.TYPED:
+      return CONTRACT_TYPED;
     case PLATFORMS.FXHASH:
       return parseInt(token_id) > 589145 ? CONTRACT_FXHASH2 : CONTRACT_FXHASH;
     default:
@@ -51,7 +60,7 @@ export const getContractFromPlatform = (platform: PLATFORMS, token_id: string) =
   }
 };
 
-export const getTezTokPlatform = (platform: PLATFORMS) => {
+export const getKeyFromPlatform = (platform: PLATFORMS) => {
   switch (platform) {
     case PLATFORMS.VERSUM:
       return 'VERSUM';
@@ -59,15 +68,26 @@ export const getTezTokPlatform = (platform: PLATFORMS) => {
       return 'HEN';
     case PLATFORMS.FXHASH:
       return 'FXHASH';
-    case PLATFORMS.OBJKT:
+    case PLATFORMS.OBJKTCOM:
       return 'OBJKT';
+    case PLATFORMS.EIGHTBIDOU:
+      return '8BIDOU';
+    case PLATFORMS.TYPED:
+      return 'TYPED';
     default:
       return false;
   }
 };
 
 export enum MESSAGES {
+  FETCHING_DATA = 'Fetching data',
   SELECT_PLATFORM = 'Select platform',
-  ERROR_COLLECTOR_EXPORT = 'Error exporting collectors',
-  FETCHING_DATA = 'Fetching data...',
+  ENTER_USER_ADDRESS = 'Enter wallet address',
+  ENTER_CONTRACT_ADDRESS = 'Enter contract address',
+  ENTER_TOKEN_ID = 'Enter Token ID',
+}
+
+export enum ERRORS {
+  ERROR_INVALID_ADDRESS = 'Invalid address',
+  ERROR_EXPORT_COLLECTOR = 'Error exporting collectors',
 }

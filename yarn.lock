@@ -2695,10 +2695,10 @@
     "type-check" "^0.4.0"
     "word-wrap" "^1.2.3"
 
-"ora-classic@^5.4.2":
-  "integrity" "sha512-/xX8D5AMHB+LnvEJHOglmq6pXwm65CQ/gqPrIjIN5GJ1Bl9KC9fSmgzR/FwjrtalDj/WVxukAVuH8GP00Zpiaw=="
-  "resolved" "https://registry.npmjs.org/ora-classic/-/ora-classic-5.4.2.tgz"
-  "version" "5.4.2"
+"ora@5.4.1":
+  "integrity" "sha512-5b6Y85tPxZZ7QytO+BQzysW31HJku27cRIlkbAXaNx+BdcVi+LlRFmVXzeF6a7JCwJpyw5c4b+YSVImQIrBpuQ=="
+  "resolved" "https://registry.npmjs.org/ora/-/ora-5.4.1.tgz"
+  "version" "5.4.1"
   dependencies:
     "bl" "^4.1.0"
     "chalk" "^4.1.0"
