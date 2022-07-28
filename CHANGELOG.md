@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/versumstudios/cli/compare/v1.1.0...v1.2.0) (2022-07-28)
+
+
+### Features
+
+* **export:** add collector export ([#17](https://github.com/versumstudios/cli/issues/17)) ([f721109](https://github.com/versumstudios/cli/commit/f7211096b77789a14c9d4b4714b59ff3ac56fc68))
+* **export:** refactor code to allow for options ([#21](https://github.com/versumstudios/cli/issues/21)) ([d366593](https://github.com/versumstudios/cli/commit/d366593be3495d301f8c44362a1be1a78c25f333))
+
+
+### Bug Fixes
+
+* **general:** refactor build script ([#18](https://github.com/versumstudios/cli/issues/18)) ([#19](https://github.com/versumstudios/cli/issues/19)) ([d1bde54](https://github.com/versumstudios/cli/commit/d1bde54a7e539bc23bceb11cc1574ddb9fd9b068))
+
 ## [1.1.0](https://github.com/versumstudios/cli/compare/v1.0.0...v1.1.0) (2022-07-23)
 
 
