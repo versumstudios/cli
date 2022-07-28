@@ -9,6 +9,7 @@ The command-line interface for versum.
   - [Contributing](#contributing)
   - [How to use](#how-to-use)
     - [Export](#export)
+    - [Templates](#templates)
 
 ## Usage
 
@@ -36,7 +37,7 @@ versum
 versum -h
 ```
 
-### Export
+## Export
 
 The versum CLI allows you to export several chunks of data into `.csv` files.
 
@@ -53,4 +54,15 @@ versum export token-collectors --contract KT1LjmAdYQCLBjwv4S2oFkEzyHVkomAf5MrW -
 versum export wallet-collectors
 versum export wallet-collectors --wallet tz1eht4WAjkqU7kaupJd8qCDmec9HuKfGf68
 versum export wallet-collectors --wallet tz1eht4WAjkqU7kaupJd8qCDmec9HuKfGf68 --platform versum
+```
+
+## Templates
+
+You can quickly generate new working folders from existing [templates](https://github.com/versumstudios/templates). This way you can start new projects without having to worry about boilerplate code.
+
+```bash
+versum template
+versum template --versum
+versum template --web
+versum template --genk
 ```
