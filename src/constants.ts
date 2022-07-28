@@ -1,5 +1,4 @@
 import chalk from 'chalk';
-// import fs from 'fs';
 import * as pkg from 'package.json';
 
 export const LOGO = `
@@ -15,9 +14,9 @@ export const COMMANDS = `${__dirname}/commands`;
 
 export const ACTIONS = './actions';
 
-export const PACKAGE = pkg; // JSON.parse(fs.readFileSync(`${process.cwd()}/package.json`, 'utf-8'));
+export const PACKAGE = pkg;
 
-export const VERSION = `${PACKAGE.name} ${PACKAGE.version}`;
+export const VERSION = `${PACKAGE.version}`;
 
 export const DESCRIPTION = `
 ${LOGO}
@@ -92,4 +91,5 @@ export enum MESSAGES {
 export enum ERRORS {
   ERROR_INVALID_ADDRESS = 'Invalid address',
   ERROR_EXPORT_COLLECTOR = 'Error exporting collectors',
+  ERROR_GENERATE_TEMPLATE = 'Error generate template',
 }
