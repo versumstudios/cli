@@ -62,7 +62,7 @@ You can quickly generate new working folders from existing [templates](https://g
 
 ```bash
 versum template
-versum template --versum
-versum template --web
-versum template --genk
+versum template --template versum-web
+versum template --template fxhash-gt-simple
+versum template --template fxhash-gt
 ```

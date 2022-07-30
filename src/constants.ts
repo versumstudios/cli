@@ -1,8 +1,8 @@
 import chalk from 'chalk';
-import * as pkg from 'package.json';
+
+import pkg from '../package.json';
 
 export const LOGO = `
-                                                     
 ██╗   ██╗███████╗██████╗ ███████╗██╗   ██╗███╗   ███╗
 ██║   ██║██╔════╝██╔══██╗██╔════╝██║   ██║████╗ ████║
 ██║   ██║█████╗  ██████╔╝███████╗██║   ██║██╔████╔██║
@@ -10,17 +10,12 @@ export const LOGO = `
  ╚████╔╝ ███████╗██║  ██║███████║╚██████╔╝██║ ╚═╝ ██║
   ╚═══╝  ╚══════╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝     ╚═╝`;
 
-export const COMMANDS = `${__dirname}/commands`;
-
-export const ACTIONS = './actions';
-
 export const PACKAGE = pkg;
 
-export const VERSION = `${PACKAGE.version}`;
+export const VERSION = `v:${PACKAGE.version}`;
 
 export const DESCRIPTION = `
-${LOGO}
-${chalk.bgBlack(chalk.green(VERSION))}`;
+${LOGO} ${chalk.bgBlack(chalk.green(VERSION))}`;
 
 export const TEZTOK_API = 'https://api.teztok.com/v1/graphql';
 
@@ -82,7 +77,9 @@ export const getKeyFromPlatform = (platform: PLATFORMS) => {
 
 export enum MESSAGES {
   FETCHING_DATA = 'Fetching data',
+  GENERATE_TEMPLATE = 'Generate template',
   SELECT_PLATFORM = 'Select platform',
+  SELECT_TEMPLATE = 'Select template',
   ENTER_USER_ADDRESS = 'Enter wallet address',
   ENTER_CONTRACT_ADDRESS = 'Enter contract address',
   ENTER_TOKEN_ID = 'Enter Token ID',

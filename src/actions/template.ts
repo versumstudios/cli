@@ -1,55 +1,72 @@
-import inquirer, { Answers, Separator } from 'inquirer';
+import inquirer from 'inquirer';
 import fetch from 'node-fetch';
 import ora from 'ora';
 
-import { CONTRACT_VERSUM, ERRORS, getContractFromPlatform, MESSAGES, PLATFORMS, TEZTOK_API } from '@constants';
-import { CollectorsType } from '@custom-types/collectors';
-import { validateContractAddress } from '@taquito/utils';
-import { SaveToFile } from '@utils/csv';
-import { error, info } from '@utils/logger';
+import { ERRORS, MESSAGES } from '../constants';
+import { GithubProps } from '../types';
+import { bash } from '../utils/bash';
+// import { downloadAndExtractRepo } from '../utils/github';
+import { error, info } from '../utils/logger';
 
-const handleAction = () => {
-  console.log('handle action');
+const handleAction = async (template: string) => {
+  const now = Date.now();
+
+  // delete any existing folder and contents
+  await bash(`rm -rf ${template}`);
+
+  // create folder
+  await bash(`mkdir ${template}`);
+
+  // download template
+  // await downloadAndExtractRepo('',);
+
+  return `"${template}" template created in ${Date.now() - now}ms`;
 };
 
-export const action = (options: Record<string, string>) => {
+export const action = async (options: Record<string, string>) => {
   // if options are present, bypass the user promp
   if (options.template) {
-    // handleAction(options.template)
-    //   .then((message) => info(message))
-    //   .catch(() => {
-    //     error(ERRORS.ERROR_GENERATE_TEMPLATE);
-    //   });
+    handleAction(options.template)
+      .then((message) => info(message))
+      .catch(() => {
+        error(ERRORS.ERROR_GENERATE_TEMPLATE);
+      });
     return;
   }
 
-  // otherwise show user promp
+  // gets a list of all templates
+  const result = await fetch('https://api.github.com/repos/versumstudios/templates/git/trees/main');
+  const { tree } = await result.json();
+
+  if (!tree) {
+    throw new Error(ERRORS.ERROR_EXPORT_COLLECTOR);
+  }
+
+  // filter list to only return folders
+  const choices = tree.filter((e: GithubProps) => e.type === 'tree').map((e: GithubProps) => e.path);
+
+  // pass the templates into inquirer
   const questions = [
     {
       type: 'list',
       name: 'template',
-      message: 'Choose a template',
-      choices: ['Web Token', 'Genk', 'WebGL'],
-      default() {
-        return PLATFORMS.VERSUM;
-      },
+      message: MESSAGES.SELECT_TEMPLATE,
+      choices,
     },
   ];
 
   inquirer.prompt(questions).then(({ template }: Record<string, string>) => {
     // select contract address from platform alias
-    // const address: string = getContractFromPlatform(platform as PLATFORMS, token as string) || contract;
-    // const spinner = ora(MESSAGES.FETCHING_DATA).start();
+    const spinner = ora(MESSAGES.GENERATE_TEMPLATE).start();
 
-    // handleAction(address, token)
-    //   .then((message: string) => {
-    //     spinner.succeed();
-    //     info(message);
-    //   })
-    //   .catch(() => {
-    //     spinner.fail();
-    //     error(ERRORS.ERROR_EXPORT_COLLECTOR);
-    //   });
-    console.log('READY', template);
+    handleAction(template)
+      .then((message: string) => {
+        spinner.succeed();
+        info(message);
+      })
+      .catch(() => {
+        spinner.fail();
+        error(ERRORS.ERROR_GENERATE_TEMPLATE);
+      });
   });
 };
