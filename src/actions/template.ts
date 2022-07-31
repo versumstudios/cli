@@ -1,24 +1,40 @@
+import fs from 'fs';
 import inquirer from 'inquirer';
 import fetch from 'node-fetch';
 import ora from 'ora';
 
+// import path from 'path';
 import { ERRORS, MESSAGES } from '../constants';
 import { GithubProps } from '../types';
-import { bash } from '../utils/bash';
-// import { downloadAndExtractRepo } from '../utils/github';
+import { copyDirectoy, deleteDirectory, makeDirectory } from '../utils/filesystem';
+import { downloadAndExtractRepo } from '../utils/github';
 import { error, info } from '../utils/logger';
 
-const handleAction = async (template: string) => {
+const handleAction = async (name = 'my-app', template: string) => {
   const now = Date.now();
 
-  // delete any existing folder and contents
-  await bash(`rm -rf ${template}`);
+  const appName = name.replace(/\s+/g, '-').toLowerCase();
 
-  // create folder
-  await bash(`mkdir ${template}`);
+  const rootDir = process.cwd();
+  const tempDir = `${rootDir}/temp`;
+  const templateDir = `${tempDir}/${template}`;
+  const targetDir = `${rootDir}/${appName}`;
 
-  // download template
-  // await downloadAndExtractRepo('',);
+  if (fs.existsSync(targetDir)) {
+    throw new Error('Directory exists');
+  }
+
+  await makeDirectory(tempDir);
+
+  await downloadAndExtractRepo(tempDir, {
+    username: 'versumstudios',
+    name: 'templates',
+    branch: 'main',
+  });
+
+  await copyDirectoy(templateDir, targetDir);
+
+  await deleteDirectory(tempDir);
 
   return `"${template}" template created in ${Date.now() - now}ms`;
 };
@@ -26,10 +42,10 @@ const handleAction = async (template: string) => {
 export const action = async (options: Record<string, string>) => {
   // if options are present, bypass the user promp
   if (options.template) {
-    handleAction(options.template)
+    handleAction(options.name, options.template)
       .then((message) => info(message))
-      .catch(() => {
-        error(ERRORS.ERROR_GENERATE_TEMPLATE);
+      .catch((e) => {
+        error(e?.toString() || ERRORS.ERROR_GENERATE_TEMPLATE);
       });
     return;
   }
@@ -48,6 +64,14 @@ export const action = async (options: Record<string, string>) => {
   // pass the templates into inquirer
   const questions = [
     {
+      type: 'input',
+      name: 'name',
+      message: MESSAGES.ENTER_PROJECT_NAME,
+      default() {
+        return 'my-app';
+      },
+    },
+    {
       type: 'list',
       name: 'template',
       message: MESSAGES.SELECT_TEMPLATE,
@@ -55,18 +79,18 @@ export const action = async (options: Record<string, string>) => {
     },
   ];
 
-  inquirer.prompt(questions).then(({ template }: Record<string, string>) => {
+  inquirer.prompt(questions).then(({ name, template }: Record<string, string>) => {
     // select contract address from platform alias
     const spinner = ora(MESSAGES.GENERATE_TEMPLATE).start();
 
-    handleAction(template)
+    handleAction(name, template)
       .then((message: string) => {
         spinner.succeed();
         info(message);
       })
-      .catch(() => {
+      .catch((e) => {
         spinner.fail();
-        error(ERRORS.ERROR_GENERATE_TEMPLATE);
+        error(e?.toString() || ERRORS.ERROR_GENERATE_TEMPLATE);
       });
   });
 };

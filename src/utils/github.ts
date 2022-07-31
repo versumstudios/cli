@@ -9,7 +9,7 @@ export type RepoInfo = {
   username: string;
   name: string;
   branch: string;
-  filePath: string;
+  filePath?: string;
 };
 
 export const downloadAndExtractRepo = (root: string, { username, name, branch, filePath }: RepoInfo): Promise<void> => {
@@ -20,14 +20,3 @@ export const downloadAndExtractRepo = (root: string, { username, name, branch, f
     ])
   );
 };
-
-/*
-TODO:
-currently removing the submodules
-
-copied vercel util to download from github
-https://github.com/vercel/next.js/blob/canary/packages/create-next-app/helpers/examples.ts
-
-reference from kickjs
-https://github.com/andrevenancio/kickjs/blob/master/bin/kickjs.bin.js
-*/

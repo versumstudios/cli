@@ -83,6 +83,7 @@ export enum MESSAGES {
   ENTER_USER_ADDRESS = 'Enter wallet address',
   ENTER_CONTRACT_ADDRESS = 'Enter contract address',
   ENTER_TOKEN_ID = 'Enter Token ID',
+  ENTER_PROJECT_NAME = 'Enter project name',
 }
 
 export enum ERRORS {
