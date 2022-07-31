@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es2019", //es2019
-    "module":"CommonJS", // delete
+    "target": "es2019",
+    "module":"CommonJS",
     "moduleResolution": "node",
     "strict": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "skipLibCheck": true, // was false
+    "skipLibCheck": true,
   },
   "exclude": ["bin"]
 }

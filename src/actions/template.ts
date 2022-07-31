@@ -3,7 +3,6 @@ import inquirer from 'inquirer';
 import fetch from 'node-fetch';
 import ora from 'ora';
 
-// import path from 'path';
 import { ERRORS, MESSAGES } from '../constants';
 import { GithubProps } from '../types';
 import { copyDirectoy, deleteDirectory, makeDirectory, parseFiles } from '../utils/filesystem';
@@ -102,7 +101,6 @@ export const action = async (options: Record<string, string>) => {
   ];
 
   inquirer.prompt(questions).then(({ template, name, description }: Record<string, string>) => {
-    // select contract address from platform alias
     const spinner = ora(MESSAGES.GENERATE_TEMPLATE).start();
 
     handleAction(template, name, description)
