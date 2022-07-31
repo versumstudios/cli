@@ -127,7 +127,7 @@ Follow the steps below to run the CLI locally:
 
 2. Install all dependencies by running `yarn`
 
-3. Run `yarn local:link`. It should create a symlink pointing to `./bin/src/index.js`.
+3. Run `yarn local:link`. It should create a symlink pointing to `./bin/index.js`.
 
 4. Run `yarn start` to transpile the typescript into javascript.
 

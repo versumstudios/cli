@@ -2,11 +2,12 @@ import inquirer, { Separator } from 'inquirer';
 import fetch from 'node-fetch';
 import ora from 'ora';
 
-import { ERRORS, getKeyFromPlatform, MESSAGES, PLATFORMS, TEZTOK_API } from '@constants';
-import { CollectorsType } from '@custom-types/collectors';
 import { validateAddress } from '@taquito/utils';
-import { SaveToFile } from '@utils/csv';
-import { error, info } from '@utils/logger';
+
+import { ERRORS, getKeyFromPlatform, MESSAGES, PLATFORMS, TEZTOK_API } from '../constants';
+import { CollectorsType } from '../types';
+import { SaveToFile } from '../utils/csv';
+import { error, info } from '../utils/logger';
 
 const handleAction = (address: string, platform?: PLATFORMS) => {
   const query = `

@@ -1,35 +1,31 @@
 #!/usr/bin/env node
 import { program } from 'commander';
-import fs from 'fs';
 import updateNotifier from 'update-notifier';
 
-import { COMMANDS, DESCRIPTION, PACKAGE } from '@constants';
-import { error } from '@utils/logger';
+import testExport from './commands/export';
+import testTemplate from './commands/template';
+import testCommand from './commands/test';
+import { error } from './utils/logger';
+import { DESCRIPTION, PACKAGE } from './constants';
 
 const main = async () => {
   // check for updates
   await updateNotifier({
     pkg: PACKAGE,
-    updateCheckInterval: 1000 * 60 * 60 * 24 * 1, // 1 day
+    updateCheckInterval: 1000 * 60 * 60 * 24 * 7,
   }).notify();
 
   // cli
   program.name('versum');
-  program.description(DESCRIPTION);
   program.version(PACKAGE.version);
-  program.usage('<command> --argument');
+  program.usage('<command>');
 
   // commands
-  const loadCommands = async () => {
-    const files = fs.readdirSync(COMMANDS).map((e) => e.replace('.ts', ''));
+  program.addCommand(testExport);
+  program.addCommand(testTemplate);
+  program.addCommand(testCommand);
 
-    for (const file of files) {
-      const { command } = await import(`${COMMANDS}/${file}`);
-      program.addCommand(command);
-    }
-  };
-
-  await loadCommands();
+  program.addHelpText('before', DESCRIPTION);
 
   program.parse(process.argv);
 

@@ -6,3 +6,8 @@ export type CollectorsType = {
     token_id: string;
   };
 }[];
+
+export type GithubProps = {
+  path: string;
+  type: string;
+};
