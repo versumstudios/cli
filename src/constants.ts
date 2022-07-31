@@ -15,7 +15,7 @@ export const PACKAGE = pkg;
 export const VERSION = `v:${PACKAGE.version}`;
 
 export const DESCRIPTION = `
-${LOGO} ${chalk.bgBlack(chalk.green(VERSION))}`;
+${LOGO} ${chalk.bgBlack(chalk.green(VERSION))}\n`;
 
 export const TEZTOK_API = 'https://api.teztok.com/v1/graphql';
 
@@ -84,6 +84,7 @@ export enum MESSAGES {
   ENTER_CONTRACT_ADDRESS = 'Enter contract address',
   ENTER_TOKEN_ID = 'Enter Token ID',
   ENTER_PROJECT_NAME = 'Enter project name',
+  ENTER_PROJECT_DESCRIPTION = 'Enter project description',
 }
 
 export enum ERRORS {

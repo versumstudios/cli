@@ -6,14 +6,26 @@ import ora from 'ora';
 // import path from 'path';
 import { ERRORS, MESSAGES } from '../constants';
 import { GithubProps } from '../types';
-import { copyDirectoy, deleteDirectory, makeDirectory } from '../utils/filesystem';
+import { copyDirectoy, deleteDirectory, makeDirectory, parseFiles } from '../utils/filesystem';
 import { downloadAndExtractRepo } from '../utils/github';
 import { error, info } from '../utils/logger';
 
-const handleAction = async (name = 'my-app', template: string) => {
+const DEFAULT_NAME = 'my-app';
+const DEFAULT_DESCRIPTION = '@versumstudios/cli template';
+
+const GITHUB_USER = 'versumstudios';
+const GITHUB_REPO = 'templates';
+const GITHUB_BRANCH = 'main';
+
+const handleAction = async (
+  template: string,
+  name: string = DEFAULT_NAME,
+  description: string = DEFAULT_DESCRIPTION
+) => {
   const now = Date.now();
 
   const appName = name.replace(/\s+/g, '-').toLowerCase();
+  const appDescription = description.toLowerCase();
 
   const rootDir = process.cwd();
   const tempDir = `${rootDir}/temp`;
@@ -21,20 +33,22 @@ const handleAction = async (name = 'my-app', template: string) => {
   const targetDir = `${rootDir}/${appName}`;
 
   if (fs.existsSync(targetDir)) {
-    throw new Error('Directory exists');
+    throw new Error('Directory already exists');
   }
 
   await makeDirectory(tempDir);
 
   await downloadAndExtractRepo(tempDir, {
-    username: 'versumstudios',
-    name: 'templates',
-    branch: 'main',
+    username: GITHUB_USER,
+    name: GITHUB_REPO,
+    branch: GITHUB_BRANCH,
   });
 
   await copyDirectoy(templateDir, targetDir);
 
   await deleteDirectory(tempDir);
+
+  await parseFiles(targetDir, appName, appDescription);
 
   return `"${template}" template created in ${Date.now() - now}ms`;
 };
@@ -42,7 +56,7 @@ const handleAction = async (name = 'my-app', template: string) => {
 export const action = async (options: Record<string, string>) => {
   // if options are present, bypass the user promp
   if (options.template) {
-    handleAction(options.name, options.template)
+    handleAction(options.template)
       .then((message) => info(message))
       .catch((e) => {
         error(e?.toString() || ERRORS.ERROR_GENERATE_TEMPLATE);
@@ -51,7 +65,7 @@ export const action = async (options: Record<string, string>) => {
   }
 
   // gets a list of all templates
-  const result = await fetch('https://api.github.com/repos/versumstudios/templates/git/trees/main');
+  const result = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/git/trees/${GITHUB_BRANCH}`);
   const { tree } = await result.json();
 
   if (!tree) {
@@ -68,7 +82,15 @@ export const action = async (options: Record<string, string>) => {
       name: 'name',
       message: MESSAGES.ENTER_PROJECT_NAME,
       default() {
-        return 'my-app';
+        return DEFAULT_NAME;
+      },
+    },
+    {
+      type: 'input',
+      name: 'description',
+      message: MESSAGES.ENTER_PROJECT_DESCRIPTION,
+      default() {
+        return DEFAULT_DESCRIPTION;
       },
     },
     {
@@ -79,11 +101,11 @@ export const action = async (options: Record<string, string>) => {
     },
   ];
 
-  inquirer.prompt(questions).then(({ name, template }: Record<string, string>) => {
+  inquirer.prompt(questions).then(({ template, name, description }: Record<string, string>) => {
     // select contract address from platform alias
     const spinner = ora(MESSAGES.GENERATE_TEMPLATE).start();
 
-    handleAction(name, template)
+    handleAction(template, name, description)
       .then((message: string) => {
         spinner.succeed();
         info(message);

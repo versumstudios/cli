@@ -17,7 +17,6 @@ const main = async () => {
 
   // cli
   program.name('versum');
-  program.description(DESCRIPTION);
   program.version(PACKAGE.version);
   program.usage('<command>');
 
@@ -25,6 +24,8 @@ const main = async () => {
   program.addCommand(testExport);
   program.addCommand(testTemplate);
   program.addCommand(testCommand);
+
+  program.addHelpText('before', DESCRIPTION);
 
   program.parse(process.argv);
 
