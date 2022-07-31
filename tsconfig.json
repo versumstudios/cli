@@ -1,27 +1,12 @@
 {
   "compilerOptions": {
-    "strict": true,
-    "noEmitOnError": true,
-    "noFallthroughCasesInSwitch": true,
+    "target": "es2019", //es2019
+    "module":"CommonJS", // delete
     "moduleResolution": "node",
-    "module": "commonjs",
-    "target": "ES2020",
-    "esModuleInterop": true,
-    "allowJs": true,
-    "lib": ["ES2020"],
+    "strict": true,
     "resolveJsonModule": true,
-    "sourceMap": false,
-    "skipLibCheck": true,
-    "outDir": "./bin",
-    "rootDir": ".",
-    "baseUrl": ".",
-    "paths": {
-      "@actions/*": ["src/actions/*"],
-      "@commands/*": ["src/commands/*"],
-      "@custom-types/*": ["src/custom-types/*"],
-      "@utils/*": ["src/utils/*"],
-      "@constants": ["src/constants"]
-    }
+    "esModuleInterop": true,
+    "skipLibCheck": true, // was false
   },
-  "include": ["src/**/*"]
+  "exclude": ["bin"]
 }

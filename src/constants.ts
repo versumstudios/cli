@@ -1,9 +1,8 @@
 import chalk from 'chalk';
-// import fs from 'fs';
-import * as pkg from 'package.json';
+
+import pkg from '../package.json';
 
 export const LOGO = `
-                                                     
 ██╗   ██╗███████╗██████╗ ███████╗██╗   ██╗███╗   ███╗
 ██║   ██║██╔════╝██╔══██╗██╔════╝██║   ██║████╗ ████║
 ██║   ██║█████╗  ██████╔╝███████╗██║   ██║██╔████╔██║
@@ -11,17 +10,12 @@ export const LOGO = `
  ╚████╔╝ ███████╗██║  ██║███████║╚██████╔╝██║ ╚═╝ ██║
   ╚═══╝  ╚══════╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝     ╚═╝`;
 
-export const COMMANDS = `${__dirname}/commands`;
+export const PACKAGE = pkg;
 
-export const ACTIONS = './actions';
-
-export const PACKAGE = pkg; // JSON.parse(fs.readFileSync(`${process.cwd()}/package.json`, 'utf-8'));
-
-export const VERSION = `${PACKAGE.name} ${PACKAGE.version}`;
+export const VERSION = `v:${PACKAGE.version}`;
 
 export const DESCRIPTION = `
-${LOGO}
-${chalk.bgBlack(chalk.green(VERSION))}`;
+${LOGO} ${chalk.bgBlack(chalk.green(VERSION))}\n`;
 
 export const TEZTOK_API = 'https://api.teztok.com/v1/graphql';
 
@@ -83,13 +77,18 @@ export const getKeyFromPlatform = (platform: PLATFORMS) => {
 
 export enum MESSAGES {
   FETCHING_DATA = 'Fetching data',
+  GENERATE_TEMPLATE = 'Generate template',
   SELECT_PLATFORM = 'Select platform',
+  SELECT_TEMPLATE = 'Select template',
   ENTER_USER_ADDRESS = 'Enter wallet address',
   ENTER_CONTRACT_ADDRESS = 'Enter contract address',
   ENTER_TOKEN_ID = 'Enter Token ID',
+  ENTER_PROJECT_NAME = 'Enter project name',
+  ENTER_PROJECT_DESCRIPTION = 'Enter project description',
 }
 
 export enum ERRORS {
   ERROR_INVALID_ADDRESS = 'Invalid address',
   ERROR_EXPORT_COLLECTOR = 'Error exporting collectors',
+  ERROR_GENERATE_TEMPLATE = 'Error generate template',
 }
