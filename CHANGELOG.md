@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.3.0](https://github.com/versumstudios/cli/compare/v1.2.0...v1.3.0) (2022-07-31)
+
+
+### Features
+
+* **general:** first public release ([#26](https://github.com/versumstudios/cli/issues/26)) ([7d7d4cb](https://github.com/versumstudios/cli/commit/7d7d4cb44daf5542d16933f2150213126222ae9e))
+* new release ([8d61f4f](https://github.com/versumstudios/cli/commit/8d61f4ffca87f6c4511d2a397608b1606f1c0cb2))
+* **templates:** adding template engine ([#25](https://github.com/versumstudios/cli/issues/25)) ([39d1ef4](https://github.com/versumstudios/cli/commit/39d1ef4106dc068e8ed6a0d59e2c19e13593dce8))
+
+
+### Miscellaneous
+
+* add eslint and prettier ([1b3702a](https://github.com/versumstudios/cli/commit/1b3702ab25383627c87d26f8ad8f5e4bd34b47fe))
+* cleanup ([73e64be](https://github.com/versumstudios/cli/commit/73e64be309c627aca47f88eb6ec357b11f490cc1))
+* **develop:** release 1.2.0 ([#24](https://github.com/versumstudios/cli/issues/24)) ([1e43ade](https://github.com/versumstudios/cli/commit/1e43adefa26ba6db4f87740254e29b3c4cb1dd89))
+* fix conflicts ([f849ace](https://github.com/versumstudios/cli/commit/f849ace9e805efe2530e2d4effd934cea7ddabac))
+
 ## [1.2.0](https://github.com/versumstudios/cli/compare/v1.1.0...v1.2.0) (2022-07-28)
 
 ### Features
