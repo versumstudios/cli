@@ -22,6 +22,8 @@
     "local:install": "npm install -g .",
     "local:uninstall": "npm uninstall -g @versumstudios/cli",
     "local:link": "yarn local:uninstall && yarn local:install",
+    "prettier": "prettier --write ./src",
+    "eslint": "eslint \"**/*.{ts,tsx}\" --fix",
     "prepare": "husky install"
   },
   "files": [
