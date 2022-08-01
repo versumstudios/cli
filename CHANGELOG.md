@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/versumstudios/cli/compare/v1.3.0...v1.3.1) (2022-08-01)
+
+
+### Miscellaneous
+
+* merge ([9538bc2](https://github.com/versumstudios/cli/commit/9538bc27dfb8b82c9fa6900ab167166fddc5fdd1))
+
 ## [1.3.0](https://github.com/versumstudios/cli/compare/v1.2.0...v1.3.0) (2022-07-31)
 
 
