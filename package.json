@@ -1,6 +1,6 @@
 {
   "name": "@versumstudios/cli",
-  "version": "1.4.4",
+  "version": "1.4.1",
   "preferGlobal": true,
   "license": "Apache-2.0",
   "description": "The command-line interface for versum",

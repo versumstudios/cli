@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.1](https://github.com/versumstudios/cli/compare/v1.4.0...v1.4.1) (2022-08-02)
+
+
+### Miscellaneous
+
+* bump node ([7b4c384](https://github.com/versumstudios/cli/commit/7b4c384933a339f12ebea5e0967a5af82db5ef94))
+* **develop:** release 1.4.0 ([#30](https://github.com/versumstudios/cli/issues/30)) ([e2f2869](https://github.com/versumstudios/cli/commit/e2f286909ba2e982acee5ee88584920539dc06fe))
+* minor release ([52256ed](https://github.com/versumstudios/cli/commit/52256ed20ace328df78433c8e9debb6ac53d0abf))
+* sync ([bb10663](https://github.com/versumstudios/cli/commit/bb10663ddbf56f1cfdf24e03b1ebc53ec56234d0))
+* test main ([57758b4](https://github.com/versumstudios/cli/commit/57758b4b89080ab58bcf72aa10d0d9a5bf117cff))
+* update with np ([c616056](https://github.com/versumstudios/cli/commit/c6160560fe6d1f6104316d156f1197da6585cb11))
+
 ## [1.4.0](https://github.com/versumstudios/cli/compare/v1.3.1...v1.4.0) (2022-08-01)
 
 
